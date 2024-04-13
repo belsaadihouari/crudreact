@@ -1,0 +1,47 @@
+header {
+    width: 100vw;
+    background-color: rgb(35, 166, 227);
+    overflow: hidden ;
+    height: 10vh ;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 0 0 25% 25%;
+    transition: 1s;
+    animation: annimheader 1s ease-out;
+    
+}
+header .btn{
+    width: 100px;
+    height: 25px;
+    border: 2px solid rgb(220, 217, 217);
+    padding: 5px;
+    text-align: center;
+    background-color: rgb(27, 26, 26);
+    color: white;
+    cursor: pointer;
+    display: inline-block;
+    user-select: none;
+    border-radius: 5px;
+    transition: 1s;
+}
+header .btn:hover{
+    color: red;
+}
+header .btn:active{
+    border-bottom: 1px solid black;
+}
+
+@keyframes annimheader{
+0%{
+    transform: translateY(-200px);
+}
+50%{
+    transform: translateY(-100px);
+}
+100%{
+    transform: translateY(0);
+}
+}

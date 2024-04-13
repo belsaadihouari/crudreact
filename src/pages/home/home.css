@@ -1,0 +1,14 @@
+main {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+main h1{
+  color: white;
+  display: block;
+}
+main p{
+  color: white;
+ 
+}

@@ -1,0 +1,17 @@
+.containerdata{
+    height: 80vh;
+    
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    margin: auto;
+    
+}
+
+.box{
+    background-color: white;
+    height: 80% !important;
+    
+}

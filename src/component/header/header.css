@@ -9,8 +9,8 @@ header {
     align-items: center;
     gap: 1rem;
     border-radius: 0 0 25% 25%;
-    transition: 1s;
-    animation: annimheader 1s ease-out;
+    transition: 0.7s;
+    animation: annimheader 0.7s ease-out;
     
 }
 header .btn{

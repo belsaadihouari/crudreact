@@ -1,12 +1,54 @@
-import React from 'react';
-import  "./header.css"
+import "./header.css";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 const Header = () => {
-    return (
-        <header className='container'>
-           <div className='btn'>Signin</div>
-           <div className='btn'>Signup</div>
-        </header>
-    );
-}
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+  return (
+    <header className="container">
+      {location.pathname !== "/" && (
+        <div
+          onClick={() => {
+            navigate("/");
+          }}
+          className="btn"
+        >
+          Home
+        </div>
+      )}
+      {location.pathname == "/signup" && (
+        <div
+          onClick={() => {
+            navigate("/signin");
+          }}
+          className="btn"
+        >
+          Signin
+        </div>
+      )}
+      {location.pathname == "/" && (
+        <div
+          onClick={() => {
+            navigate("/signin");
+          }}
+          className="btn"
+        >
+          Signin
+        </div>
+      )}
+      {location.pathname !== "/signup" && (
+        <div
+          onClick={() => {
+            navigate("/signup");
+          }}
+          className="btn"
+        >
+          Signup
+        </div>
+      )}
+    </header>
+  );
+};
 
 export default Header;

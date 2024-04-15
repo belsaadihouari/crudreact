@@ -16,7 +16,6 @@
     "@mui/material": "^5.15.15",
     "@mui/x-data-grid-generator": "^6.19.10",
     "@mui/x-data-grid-pro": "^6.19.10",
-    "@prisma/client": "^5.12.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3"
@@ -30,7 +29,6 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
-    "prisma": "^5.12.1",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
   }

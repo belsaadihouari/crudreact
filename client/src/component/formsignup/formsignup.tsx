@@ -1,21 +1,69 @@
+import toast from "react-hot-toast";
 import "./formsignup.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 interface Data {
-  username:string,
-  email:string,
-  password:string,
-  cpassword:string
+  username: string | null;
+  email: string | null;
+  password: string | null;
+  cpassword: string | null;
+  isAdmin: boolean;
 }
 const Formsignup = () => {
+  const navigate = useNavigate();
   const [state, setstate] = useState<boolean>(false);
-  const [state2,setState2]=useState<Data>({username:"",email:"",password:"",cpassword:""})
+  const [state2, setState2] = useState<Data>({
+    username: null,
+    email: null,
+    password: null,
+    cpassword: null,
+    isAdmin: false,
+  });
 
-const handlechange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-setState2({...state2,[e.target.name]:e.target.value})
-}
+  const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setState2({ ...state2, [e.target.name]: e.target.value });
+  };
+
+  async function handlerSignup(e: React.SyntheticEvent<EventTarget>) {
+    e.preventDefault();
+    try {
+      const res = await fetch("http://localhost:8085/createUser", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: state2.username,
+          email: state2.email,
+          password: state2.password,
+          cpassword: state2.cpassword,
+          isAdmin: state2.isAdmin,
+        }),
+      });
+      const data = await res.json();
+      if (data.validator) {
+        toast.error("Error validation input");
+      }
+      if (data.message) {
+        toast.error("Email Already Exist");
+      }
+      if (data.cpass) {
+        toast.error("Error confiramtion Password");
+      }
+      if (data.response) {
+        navigate("/data")
+        toast.success("User added successfuly");
+        
+      }
+    } catch (error) {
+      toast.error("internal server error");
+    }
+  }
 
   return (
-    <form className="login-form2">
+    <form onSubmit={handlerSignup} className="login-form2">
       <p className="heading2">Sign-up</p>
       <div className="input-group">
         <input
@@ -26,10 +74,9 @@ setState2({...state2,[e.target.name]:e.target.value})
           id="username"
           type="text"
           onChange={handlechange}
-          
         />
       </div>
-      
+
       <div className="input-group2">
         <input
           required
@@ -39,7 +86,6 @@ setState2({...state2,[e.target.name]:e.target.value})
           id="email"
           type="email"
           onChange={handlechange}
-          
         />
       </div>
       <div className="input-group2">

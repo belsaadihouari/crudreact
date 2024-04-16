@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import Signup from './pages/signup/signup.tsx'
 import Data from './pages/data/data.tsx'
+import  { Toaster } from 'react-hot-toast';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -31,5 +32,6 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <Toaster />
   </React.StrictMode>,
 )

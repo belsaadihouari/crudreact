@@ -1,9 +1,7 @@
 import { z } from "zod";
 
-export const validationzod = z.object({
-  username: z.string(),
+export const validationzodsignin = z.object({
   email: z.string().email("invalid Email"),
   password: z.string(),
   cpassword: z.string(),
-  isAdmin: z.boolean()
 });

@@ -2,54 +2,81 @@ import "./data.css";
 import Layout from "../../component/layout/layout";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-const rows = [
-  { id: 1, email: "Snow", username: "stat1401@gmail.com", isAdmin: 14 },
-  { id: 2, email: "Lannister", username: "Cersei", isAdmin: 31 },
-  { id: 3, email: "Lannister", username: "Jaime", isAdmin: 31 },
-  { id: 4, email: "Stark", username: "Arya", isAdmin: 11 },
-  { id: 5, email: "Targaryen", username: "Daenerys", isAdmin: null },
-  { id: 6, email: "Melisandre", username: "houari", isAdmin: 150 },
-  { id: 7, email: "Clifford", username: "Ferrara", isAdmin: 44 },
-  { id: 8, email: "Frances", username: "Rossini", isAdmin: 36 },
-  { id: 9, email: "Roxie", username: "Harvey", isAdmin: 65 },
-];
-const columns: GridColDef<(typeof rows)[number]>[] = [
-  { field: "id", headerName: "ID", width: 90 },
-  {
-    field: "username",
-    headerName: "Username",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "email",
-    headerName: "Email",
-    width: 200,
-    editable: true,
-  },
-  {
-    field: "isAdmin",
-    headerName: "is Admin ?",
-    type: "number",
-    width: 110,
-    editable: true,
-  },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    description: "This column has a value getter and is not sortable.",
-    sortable: false,
-    width: 200,
-    valueGetter: (params) => {
-      if (params && params.row) {
-        return `${params.row.username || ""} ${params.row.email || ""}`;
-      }
-      return "";
-    },
-  },
-];
+import { useEffect, useState } from "react";
+
+interface Datarows {
+  id: number | null;
+  email: string | null;
+  username: string | null;
+
+  isAdmin: boolean;
+}
 
 const Data = () => {
+  const [rows, setRows] = useState<Datarows[]>([
+    {
+      id: 0,
+      username: "",
+      email: "",
+      isAdmin: false,
+    },
+  ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch("http://localhost:8085/get", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const response = await res.json();
+        setRows(response);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des données:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const columns: GridColDef<(typeof rows)[number]>[] = [
+    { field: "id", headerName: "ID", width: 90 },
+    {
+      field: "username",
+      headerName: "Username",
+      width: 200,
+      editable: false,
+    },
+    {
+      field: "email",
+      headerName: "Email",
+      width: 200,
+      editable: false,
+    },
+    {
+      field: "isAdmin",
+      headerName: "is Admin?",
+      type: "text",
+      width: 110,
+      editable: false,
+    },
+    {
+      field: "fullName",
+      headerName: "Merge",
+      description: "This column has a value getter and is not sortable.",
+      sortable: false,
+      width: 200,
+      valueGetter: (params) => {
+        if (params && params.row) {
+          return `${params.row.username || ""} ${params.row.email || ""}`;
+        }
+        return "";
+      },
+    },
+  ];
+
   return (
     <Layout>
       <div className="containerdata">

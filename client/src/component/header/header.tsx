@@ -6,12 +6,6 @@ const Header = () => {
   const navigate = useNavigate();
   return (
 
-
-
-
-
-
-    
     <header className="container">
       {location.pathname !== "/" && (
         <div

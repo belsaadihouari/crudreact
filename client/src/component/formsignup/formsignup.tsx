@@ -21,6 +21,13 @@ const Formsignup = () => {
     isAdmin: false,
   });
 
+
+
+
+
+
+
+  
   const handlechange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setState2({ ...state2, [e.target.name]: e.target.value });
   };
